@@ -1,0 +1,392 @@
+To implement Insertion Sort and Comparative analysis of large values of ‘n’.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void insertionSort(int a[], int n)
+{
+    int i, j, key;
+    for (i = 1; i < n; i++)
+    {
+        key = a[i];
+        j = i - 1;
+        while (j >= 0 && a[j] > key)
+        {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+}
+
+int main()
+{
+    int sizes[] = {1000, 5000, 10000, 20000, 50000};
+    int count = 5, k, i;
+    clock_t start, end;
+    double timeTaken;
+
+    printf("Insertion Sort - Comparative Analysis\n");
+    printf("%-10s %-15s\n", "n", "Time (sec)");
+
+    for (k = 0; k < count; k++)
+    {
+        int n = sizes[k];
+        int *a = (int *)malloc(n * sizeof(int));
+
+        for (i = 0; i < n; i++)
+            a[i] = rand() % 100000;
+
+        start = clock();
+        insertionSort(a, n);
+        end = clock();
+
+        timeTaken = (double)(end - start) / CLOCKS_PER_SEC;
+        printf("%-10d %-15f\n", n, timeTaken);
+        free(a);
+    }
+    return 0;
+}
+
+============================================================
+
+To implement Selection Sort and Comparative analysis of large values of ‘n’.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void selectionSort(int a[], int n)
+{
+    int i, j, min, temp;
+    for (i = 0; i < n - 1; i++)
+    {
+        min = i;
+        for (j = i + 1; j < n; j++)
+        {
+            if (a[j] < a[min])
+                min = j;
+        }
+        temp = a[i];
+        a[i] = a[min];
+        a[min] = temp;
+    }
+}
+
+int main()
+{
+    int sizes[] = {1000, 5000, 10000, 20000, 50000};
+    int count = 5, k, i;
+    clock_t start, end;
+    double timeTaken;
+
+    printf("Selection Sort - Comparative Analysis\n");
+    printf("%-10s %-15s\n", "n", "Time (sec)");
+
+    for (k = 0; k < count; k++)
+    {
+        int n = sizes[k];
+        int *a = (int *)malloc(n * sizeof(int));
+
+        for (i = 0; i < n; i++)
+            a[i] = rand() % 100000;
+
+        start = clock();
+        selectionSort(a, n);
+        end = clock();
+
+        timeTaken = (double)(end - start) / CLOCKS_PER_SEC;
+        printf("%-10d %-15f\n", n, timeTaken);
+        free(a);
+    }
+    return 0;
+}
+
+============================================================
+
+To implement Binary Search for ‘n’ number and perform analysis using DAC Technique.
+
+#include <stdio.h>
+
+int comparisons = 0;
+
+int binarySearch(int a[], int low, int high, int key)
+{
+    int mid;
+    if (low > high)
+        return -1;
+
+    mid = (low + high) / 2;
+    comparisons++;
+
+    if (a[mid] == key)
+        return mid;
+    else if (key < a[mid])
+        return binarySearch(a, low, mid - 1, key);
+    else
+        return binarySearch(a, mid + 1, high, key);
+}
+
+int main()
+{
+    int a[100], n, i, key, pos;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d elements in sorted order: ", n);
+    for (i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    printf("Enter element to search: ");
+    scanf("%d", &key);
+
+    pos = binarySearch(a, 0, n - 1, key);
+
+    if (pos == -1)
+        printf("Element not found\n");
+    else
+        printf("Element found at position %d\n", pos + 1);
+
+    printf("Number of comparisons = %d\n", comparisons);
+
+    /* Analysis (Divide and Conquer): T(n) = T(n/2) + 1
+       Best case: O(1), Average and Worst case: O(log n) */
+
+    return 0;
+}
+
+============================================================
+
+To implement Min and Maximum finding algorithm
+
+#include <stdio.h>
+
+void maxMin(int a[], int low, int high, int *max, int *min)
+{
+    int mid, max1, min1;
+
+    if (low == high)
+    {
+        *max = a[low];
+        *min = a[low];
+    }
+    else if (high == low + 1)
+    {
+        if (a[low] > a[high])
+        {
+            *max = a[low];
+            *min = a[high];
+        }
+        else
+        {
+            *max = a[high];
+            *min = a[low];
+        }
+    }
+    else
+    {
+        mid = (low + high) / 2;
+        maxMin(a, low, mid, max, min);
+        maxMin(a, mid + 1, high, &max1, &min1);
+
+        if (max1 > *max)
+            *max = max1;
+        if (min1 < *min)
+            *min = min1;
+    }
+}
+
+int main()
+{
+    int a[100], n, i, max, min;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d elements: ", n);
+    for (i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    maxMin(a, 0, n - 1, &max, &min);
+
+    printf("Maximum element = %d\n", max);
+    printf("Minimum element = %d\n", min);
+
+    return 0;
+}
+
+============================================================
+
+Implement the Naïve string-matching algorithm and analyse its complexity.
+
+#include <stdio.h>
+#include <string.h>
+
+void naiveSearch(char text[], char pat[])
+{
+    int n = strlen(text);
+    int m = strlen(pat);
+    int i, j, found = 0;
+
+    for (i = 0; i <= n - m; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            if (text[i + j] != pat[j])
+                break;
+        }
+
+        if (j == m)
+        {
+            printf("Pattern found at index %d\n", i);
+            found = 1;
+        }
+    }
+
+    if (!found)
+        printf("Pattern not found\n");
+}
+
+int main()
+{
+    char text[100], pat[50];
+
+    printf("Enter the text: ");
+    scanf("%s", text);
+
+    printf("Enter the pattern: ");
+    scanf("%s", pat);
+
+    naiveSearch(text, pat);
+
+    /* Complexity: Best case O(n), Worst case O(n * m) */
+
+    return 0;
+}
+
+============================================================
+
+To implement Sum of Subset Algorithm using Backtracking Method
+
+#include <stdio.h>
+
+int w[20], x[20], n, m;
+
+void sumOfSubset(int k, int sum, int rem)
+{
+    int i;
+
+    if (sum == m)
+    {
+        printf("Subset: { ");
+        for (i = 1; i <= n; i++)
+        {
+            if (x[i] == 1)
+                printf("%d ", w[i]);
+        }
+        printf("}\n");
+        return;
+    }
+
+    if (k > n || sum > m || sum + rem < m)
+        return;
+
+    x[k] = 1;
+    sumOfSubset(k + 1, sum + w[k], rem - w[k]);
+
+    x[k] = 0;
+    sumOfSubset(k + 1, sum, rem - w[k]);
+}
+
+int main()
+{
+    int i, total = 0;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter the elements: ");
+    for (i = 1; i <= n; i++)
+    {
+        scanf("%d", &w[i]);
+        total = total + w[i];
+        x[i] = 0;
+    }
+
+    printf("Enter the required sum: ");
+    scanf("%d", &m);
+
+    printf("Subsets with sum %d are:\n", m);
+    sumOfSubset(1, 0, total);
+
+    return 0;
+}
+
+============================================================
+
+To implement Fractional KnapSack using Greedy Method.
+
+#include <stdio.h>
+
+int main()
+{
+    int n, i, j, capacity;
+    float weight[20], profit[20], ratio[20], x[20];
+    float temp, totalProfit = 0;
+
+    printf("Enter number of items: ");
+    scanf("%d", &n);
+
+    printf("Enter weight and profit of each item:\n");
+    for (i = 0; i < n; i++)
+    {
+        scanf("%f %f", &weight[i], &profit[i]);
+        ratio[i] = profit[i] / weight[i];
+        x[i] = 0;
+    }
+
+    printf("Enter capacity of knapsack: ");
+    scanf("%d", &capacity);
+
+    /* Sort items in decreasing order of profit/weight ratio */
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (ratio[j] < ratio[j + 1])
+            {
+                temp = ratio[j];   ratio[j] = ratio[j + 1];   ratio[j + 1] = temp;
+                temp = weight[j];  weight[j] = weight[j + 1]; weight[j + 1] = temp;
+                temp = profit[j];  profit[j] = profit[j + 1]; profit[j + 1] = temp;
+            }
+        }
+    }
+
+    float remaining = capacity;
+
+    for (i = 0; i < n; i++)
+    {
+        if (weight[i] <= remaining)
+        {
+            x[i] = 1;
+            remaining = remaining - weight[i];
+            totalProfit = totalProfit + profit[i];
+        }
+        else
+        {
+            x[i] = remaining / weight[i];
+            totalProfit = totalProfit + x[i] * profit[i];
+            break;
+        }
+    }
+
+    printf("\nItem  Weight  Profit  Fraction taken\n");
+    for (i = 0; i < n; i++)
+        printf("%d     %.1f     %.1f     %.2f\n", i + 1, weight[i], profit[i], x[i]);
+
+    printf("\nMaximum profit = %.2f\n", totalProfit);
+
+    return 0;
+}
