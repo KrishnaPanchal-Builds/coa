@@ -1,23 +1,22 @@
-To implement Selection Sort and Comparative analysis of large values of ‘n’.
+// To implement Insertion Sort and Comparative analysis of large values of 'n'.
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-void selectionSort(int a[], int n)
+void insertionSort(int a[], int n)
 {
-    int i, j, min, temp;
-    for (i = 0; i < n - 1; i++)
+    int i, j, key;
+    for (i = 1; i < n; i++)
     {
-        min = i;
-        for (j = i + 1; j < n; j++)
+        key = a[i];
+        j = i - 1;
+        while (j >= 0 && a[j] > key)
         {
-            if (a[j] < a[min])
-                min = j;
+            a[j + 1] = a[j];
+            j--;
         }
-        temp = a[i];
-        a[i] = a[min];
-        a[min] = temp;
+        a[j + 1] = key;
     }
 }
 
@@ -28,7 +27,7 @@ int main()
     clock_t start, end;
     double timeTaken;
 
-    printf("Selection Sort - Comparative Analysis\n");
+    printf("Insertion Sort - Comparative Analysis\n");
     printf("%-10s %-15s\n", "n", "Time (sec)");
 
     for (k = 0; k < count; k++)
@@ -40,7 +39,7 @@ int main()
             a[i] = rand() % 100000;
 
         start = clock();
-        selectionSort(a, n);
+        insertionSort(a, n);
         end = clock();
 
         timeTaken = (double)(end - start) / CLOCKS_PER_SEC;

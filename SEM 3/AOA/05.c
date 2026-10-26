@@ -1,4 +1,4 @@
-Implement the Naïve string-matching algorithm and analyse its complexity.
+// Implement the Naive string-matching algorithm and analyse its complexity.
 
 #include <stdio.h>
 #include <string.h>

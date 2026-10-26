@@ -1,4 +1,4 @@
-To implement Binary Search for ‘n’ number and perform analysis using DAC Technique.
+// To implement Binary Search for 'n' numbers and perform analysis using DAC Technique.
 
 #include <stdio.h>
 

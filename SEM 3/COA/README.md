@@ -2,9 +2,9 @@
 
 Practicals and laboratory assignments for Computer Organization and Architecture.
 
-## Experiment Navigation
+## Program Navigation
 
-| No. | Experiment Heading | Code File | Description |
+| # | Program Title | Code File | Description |
 |:---:|:---|:---:|:---|
 | 01 | [Number Base Conversion](./01.c) | [`01.c`](./01.c) | Decimal and hexadecimal to binary conversion |
 | 02 | [Twos Complement Conversion](./02.c) | [`02.c`](./02.c) | 1's and 2's complement of binary numbers |
@@ -19,7 +19,7 @@ Practicals and laboratory assignments for Computer Organization and Architecture
 
 ---
 
-## Detailed Experiments
+## Detailed Programs
 
 ### [Number Base Conversion](./01.c)
 - **Direct Link:** [`01.c`](./01.c)

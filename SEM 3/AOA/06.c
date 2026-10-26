@@ -1,4 +1,4 @@
-To implement Sum of Subset Algorithm using Backtracking Method
+// To implement Sum of Subset Algorithm using Backtracking Method.
 
 #include <stdio.h>
 

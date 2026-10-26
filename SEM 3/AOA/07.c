@@ -1,4 +1,4 @@
-To implement Fractional KnapSack using Greedy Method.
+// To implement Fractional Knapsack using Greedy Method.
 
 #include <stdio.h>
 

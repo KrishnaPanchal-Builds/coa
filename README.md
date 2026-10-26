@@ -1,4 +1,4 @@
-# COLLEGE PRACTICALS
+# college-practicals
 
 Repository containing college laboratory practicals and coursework implementations.
 

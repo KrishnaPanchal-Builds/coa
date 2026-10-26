@@ -1,4 +1,4 @@
-To implement Min and Maximum finding algorithm
+// To implement Min and Maximum finding algorithm.
 
 #include <stdio.h>
 
